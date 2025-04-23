@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "693407888632",
+    "project_id": "daa-project-b0e87",
+    "storage_bucket": "daa-project-b0e87.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:693407888632:android:080f563a07fc6c2ec0370d",
+        "android_client_info": {
+          "package_name": "com.example.daa_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFpTaw_XZpjbtWp-L4EtRVpObCY6zY2BM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
