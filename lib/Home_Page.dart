@@ -151,26 +151,49 @@ class _HomePageState extends State<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               SizedBox(
-                height: 430,
+                height: 420,
               ),
               Padding(
                 padding: EdgeInsets.all(25),
-                child: Container(
-                  height: 45,
-                  width: 500,
-                  decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 233, 230, 230),
-                      borderRadius: BorderRadius.all(Radius.circular(50))),
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor: WidgetStateProperty.all<Color>(Color.fromARGB(255, 2, 75, 201)),
+                    elevation: WidgetStatePropertyAll(10)
+                  ),
+                  onPressed: (){}, 
                   child: Row(
-                    children: <Widget>[
+                    children: [
                       SizedBox(
-                        width: 20,
+                        width: 107,
                       ),
-                      Icon(Icons.search),
+                      Icon(Icons.search,color: Colors.white,),
                       SizedBox(
                         width: 5,
                       ),
-                      Text('Search Routes'),
+                      Text('Search Routes',style: TextStyle(fontWeight: FontWeight.w700,color: Colors.white),),
+                    ],
+                  )),
+              ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(20, 0, 20, 5),
+                child: Container(
+                  height: 300,
+                  width: double.infinity,
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(15, 0, 0, 0),
+                            child: Text('Recent Search', style: TextStyle(fontWeight: FontWeight.w900,fontSize: 16),)
+                          ),
+                          Padding
+                          (
+                            padding: EdgeInsets.only(left: 220),
+                            child: Text('see all',style: TextStyle(color: Color.fromARGB(255, 2, 75, 201),fontWeight: FontWeight.w500),),
+                          )
+                        ],
+                      )
                     ],
                   ),
                 ),
