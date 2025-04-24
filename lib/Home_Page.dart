@@ -1,3 +1,4 @@
+import 'package:daa_project/All_Recent_Search_Viewer.dart';
 import 'package:daa_project/Route__Provider.dart';
 import 'package:daa_project/Save.dart';
 import 'package:daa_project/Search.dart';
@@ -220,11 +221,18 @@ class _HomePageState extends State<HomePage> {
                                 )),
                             Padding(
                               padding: EdgeInsets.only(left: 220),
-                              child: Text(
-                                'see all',
-                                style: TextStyle(
-                                    color: Color.fromARGB(255, 2, 75, 201),
-                                    fontWeight: FontWeight.w500),
+                              child: GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) =>
+                                          AllRecentSearchViewer()));
+                                },
+                                child: Text(
+                                  'see all',
+                                  style: TextStyle(
+                                      color: Color.fromARGB(255, 2, 75, 201),
+                                      fontWeight: FontWeight.w500),
+                                ),
                               ),
                             )
                           ],
@@ -246,7 +254,7 @@ class _HomePageState extends State<HomePage> {
                                 final route = recent_Routes[index];
                                 return ListTile(
                                   leading: const Icon(Icons.route),
-                                  title: Text("${route.from} -> ${route.to}"),
+                                  title: Text("${route.from}  --->  ${route.to}"),
                                   subtitle: Text('Date: ${route.date.toLocal()}'
                                       .split('')[0]),
                                 );
