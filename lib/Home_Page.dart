@@ -28,8 +28,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer(
-      builder: (context, value, child) => Scaffold(
+    return Consumer<Route_Provider>(
+      builder: (context, route_provider, child) => Scaffold(
         body: SingleChildScrollView(
           child: Stack(children: [
             Container(
@@ -172,12 +172,12 @@ class _HomePageState extends State<HomePage> {
                               .add_Route(from_Controller.text.trim(),
                                   to_Controller.text.trim(), selectedDate!);
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text('Route added successfully!')));
-                            from_Controller.clear();
-                            to_Controller.clear();
-                        }
-                        else{
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Please fill all the fields')));
+                              content: Text('Route added successfully!')));
+                          from_Controller.clear();
+                          to_Controller.clear();
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text('Please fill all the fields')));
                         }
                       },
                       child: Row(
@@ -228,6 +228,31 @@ class _HomePageState extends State<HomePage> {
                               ),
                             )
                           ],
+                        ),
+                        Expanded(
+                          child: Builder(builder: (context) {
+                            final recent_Routes =
+                                route_provider.routes.reversed.take(3).toList();
+
+                            if (recent_Routes.isEmpty) {
+                              return Center(
+                                child: Text('No Recent Searches'),
+                              );
+                            }
+
+                            return ListView.builder(
+                              itemCount: recent_Routes.length,
+                              itemBuilder: (context, index) {
+                                final route = recent_Routes[index];
+                                return ListTile(
+                                  leading: const Icon(Icons.route),
+                                  title: Text("${route.from} -> ${route.to}"),
+                                  subtitle: Text('Date: ${route.date.toLocal()}'
+                                      .split('')[0]),
+                                );
+                              },
+                            );
+                          }),
                         )
                       ],
                     ),
