@@ -57,7 +57,7 @@ class _HomePageState extends State<HomePage> {
             child: Padding(
                 padding: EdgeInsets.fromLTRB(0, 110, 0, 0),
                 child: Container(
-                  height: 320,
+                  height: 310,
                   width: 390,
                   decoration: BoxDecoration(
                       color: Colors.white,
@@ -130,8 +130,8 @@ class _HomePageState extends State<HomePage> {
                         ),
                         DatePicker(
                           DateTime.now(),
-                          width: 60,
-                          height: 100,
+                          width: 50,
+                          height: 88,
                           initialSelectedDate: DateTime.now(),
                           selectionColor: Color.fromARGB(255, 2, 75, 201),
                           selectedTextColor: Colors.white,
@@ -151,7 +151,7 @@ class _HomePageState extends State<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               SizedBox(
-                height: 380,
+                height: 430,
               ),
               Padding(
                 padding: EdgeInsets.all(25),

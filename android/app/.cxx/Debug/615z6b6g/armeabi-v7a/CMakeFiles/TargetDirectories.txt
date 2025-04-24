@@ -1,0 +1,2 @@
+C:/Users/HP/OneDrive/Desktop/daa_project/android/app/.cxx/Debug/615z6b6g/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/Users/HP/OneDrive/Desktop/daa_project/android/app/.cxx/Debug/615z6b6g/armeabi-v7a/CMakeFiles/rebuild_cache.dir
