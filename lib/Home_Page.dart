@@ -254,9 +254,10 @@ class _HomePageState extends State<HomePage> {
                                 final route = recent_Routes[index];
                                 return ListTile(
                                   leading: const Icon(Icons.route),
-                                  title: Text("${route.from}  --->  ${route.to}"),
-                                  subtitle: Text('Date: ${route.date.toLocal()}'
-                                      .split('')[0]),
+                                  title:
+                                      Text("${route.from}  --->  ${route.to}"),
+                                  subtitle: Text(
+                                      'Date: ${route.date.toLocal().toString().split(' ')[0]}'),
                                 );
                               },
                             );
