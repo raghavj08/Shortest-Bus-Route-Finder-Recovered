@@ -1,13 +1,17 @@
+import 'dart:convert';
+
 import 'package:daa_project/All_Recent_Search_Viewer.dart';
 import 'package:daa_project/Auth/Log_In.dart';
 import 'package:daa_project/Route__Provider.dart';
 import 'package:daa_project/Save.dart';
 import 'package:daa_project/Search.dart';
+import 'package:daa_project/Searched_Routes.dart';
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -25,9 +29,9 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  TextEditingController from_Controller = new TextEditingController();
-  TextEditingController to_Controller = new TextEditingController();
-  TextEditingController date_Controller = new TextEditingController();
+  TextEditingController from_Controller = TextEditingController();
+  TextEditingController to_Controller = TextEditingController();
+  TextEditingController date_Controller = TextEditingController();
   DateTime? selectedDate;
 
   void logout() async {
@@ -35,6 +39,45 @@ class _HomePageState extends State<HomePage> {
     if (!mounted) return;
     Navigator.of(context)
         .pushReplacement(MaterialPageRoute(builder: (context) => LogIn()));
+  }
+
+  Future<void> _searchRoutes(BuildContext context) async {
+    if (from_Controller.text.isEmpty || to_Controller.text.isEmpty) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Fill both text fields')));
+      return;
+    }
+
+    final String source = from_Controller.text.trim();
+    final String destination = to_Controller.text.trim();
+
+    final Uri uri = Uri.parse(
+        'http://10.0.2.2:5000/shortest-path?source=$source&destination=$destination');
+
+    try {
+      final response = await http.get(uri);
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> data = json.decode(response.body);
+        if (!mounted) return;
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => SearchedRoutes(
+                    source: source,
+                    destination: destination,
+                    searchResults: data)));
+      } else {
+        if (!mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Error: ${response.reasonPhrase}')));
+      }
+    } catch (error) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(
+              'Failed to connect to the server: $error')));
+    }
   }
 
   @override
@@ -194,8 +237,7 @@ class _HomePageState extends State<HomePage> {
                           Provider.of<Route_Provider>(context, listen: false)
                               .add_Route(from_Controller.text.trim(),
                                   to_Controller.text.trim(), selectedDate!);
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              content: Text('Route added successfully!')));
+                          _searchRoutes(context);
                           from_Controller.clear();
                           to_Controller.clear();
                         } else {
