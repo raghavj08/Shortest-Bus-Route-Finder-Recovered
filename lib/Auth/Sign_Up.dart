@@ -29,9 +29,10 @@ class _SignUpState extends State<SignUp> {
       ),
     );
 
-    if (_passwordController.text != _confirmPasswordController) {
-      Navigator.pop(context);
+    if (_passwordController.text != _confirmPasswordController.text) {
+      if (context.mounted) Navigator.pop(context);
       displayMessageToUser("Passwords don't match", context);
+      return;
     }
 
     try {
@@ -42,17 +43,17 @@ class _SignUpState extends State<SignUp> {
 
       print("User Registered: ${userCredential.user?.email}");
 
-      if (context.mounted) {
-        Navigator.pop(context);
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => HomePage(),
-          ),
-        );
-      }
+      if (!mounted) return;
+      Navigator.pop(context);
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => HomePage(),
+        ),
+      );
     } on FirebaseAuthException catch (e) {
-      Navigator.pop(context); // Close loading dialog
+      if (!mounted) return;
+      Navigator.pop(context);
 
       if (e.code == 'email-already-in-use') {
         displayMessageToUser("Email is already registered!", context);
@@ -72,15 +73,18 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-      appBar: AppBar(title: Text('Sign Up', 
-      style: TextStyle(
-      fontWeight: FontWeight.w600,
-      fontSize: 36,
-      color: const Color.fromARGB(255, 2, 75, 201)),),),
+      appBar: AppBar(
+        title: Text(
+          'Sign Up',
+          style: TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 36,
+              color: const Color.fromARGB(255, 2, 75, 201)),
+        ),
+      ),
       body: SingleChildScrollView(
-        child: Stack(
-          children: [
-            Center(
+        child: Stack(children: [
+          Center(
             child: Padding(
               padding: const EdgeInsets.all(40),
               child: Column(
@@ -94,8 +98,8 @@ class _SignUpState extends State<SignUp> {
                       Container(
                         height: 200,
                         width: 200,
-                        child:
-                            Lottie.asset('assets/Animation - 1741289221033.json'),
+                        child: Lottie.asset(
+                            'assets/Animation - 1741289221033.json'),
                       ),
                       Positioned(
                         top: 170,
@@ -181,11 +185,8 @@ class _SignUpState extends State<SignUp> {
               ),
             ),
           ),
-          ]
-        ),
+        ]),
       ),
     );
   }
 }
-
-
