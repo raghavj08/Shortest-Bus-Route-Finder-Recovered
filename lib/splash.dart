@@ -1,4 +1,5 @@
 import 'package:daa_project/Auth/Log_In.dart';
+import 'package:daa_project/Auth/auth.dart';
 import 'package:daa_project/main.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -17,7 +18,7 @@ class _SplashState extends State<Splash> {
     Future.delayed(Duration(seconds: 4), () {
       Navigator.pushReplacement(
         context, 
-        MaterialPageRoute(builder: (context) => LogIn(),));
+        MaterialPageRoute(builder: (context) => AuthPage(),));
     });
   }
 

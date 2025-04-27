@@ -1,8 +1,11 @@
 import 'package:daa_project/All_Recent_Search_Viewer.dart';
+import 'package:daa_project/Auth/Log_In.dart';
 import 'package:daa_project/Route__Provider.dart';
 import 'package:daa_project/Save.dart';
 import 'package:daa_project/Search.dart';
 import 'package:date_picker_timeline/date_picker_timeline.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -26,6 +29,13 @@ class _HomePageState extends State<HomePage> {
   TextEditingController to_Controller = new TextEditingController();
   TextEditingController date_Controller = new TextEditingController();
   DateTime? selectedDate;
+
+  void logout() async {
+    await FirebaseAuth.instance.signOut();
+    if (!mounted) return;
+    Navigator.of(context)
+        .pushReplacement(MaterialPageRoute(builder: (context) => LogIn()));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +66,18 @@ class _HomePageState extends State<HomePage> {
                           fontSize: 16,
                           color: Colors.white),
                     )),
+                SizedBox(
+                  width: 80,
+                ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(50, 47, 0, 0),
+                  child: IconButton(
+                      onPressed: logout,
+                      icon: Icon(
+                        Icons.logout,
+                        color: Colors.white,
+                      )),
+                )
               ]),
             ),
             Center(

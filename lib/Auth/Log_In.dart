@@ -35,15 +35,15 @@ class _LogInState extends State<LogIn> {
 
       print("User Logged In: ${userCredential.user?.email}");
 
-      if (context.mounted) {
-        Navigator.pop(context);
-        Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => HomePage(),
-            ));
-      }
+      if (!mounted) return;
+      Navigator.pop(context);
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => HomePage(),
+          ));
     } on FirebaseAuthException catch (e) {
+      if (!mounted) return;
       Navigator.pop(context);
       if (e.code == 'user-not-found') {
         displayMessageToUser("No user found with that e-mail id", context);
