@@ -354,11 +354,13 @@ class _HomePageState extends State<HomePage> {
                                 color: Colors.black,
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(30))),
+                            clipBehavior: Clip.hardEdge,
+                            child: Image.asset('assets/PGI_to_Zirakpur.webp',fit: BoxFit.fill,),
                           ),
                           Padding(
-                              padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                              padding: EdgeInsets.fromLTRB(45, 0, 0, 0),
                               child: Text(
-                                'Route A',
+                                'PGI - Zirakpur',
                                 style: TextStyle(
                                     fontSize: 16, fontWeight: FontWeight.w600),
                               )),
@@ -377,14 +379,17 @@ class _HomePageState extends State<HomePage> {
                                 color: Colors.black,
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(30))),
+                            clipBehavior: Clip.hardEdge,
+                            child: Image.asset('assets/ISBT-43_to_Manimajra.webp',fit: BoxFit.fill,),
                           ),
                           Padding(
-                              padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                              padding: EdgeInsets.fromLTRB(19, 0, 0, 0),
                               child: Text(
-                                'Route B',
+                                'ISBT-43 - Manimajra',
                                 style: TextStyle(
                                     fontSize: 16, fontWeight: FontWeight.w600),
-                              )),
+                              )
+                            ),
                         ],
                       ),
                       SizedBox(
@@ -400,11 +405,13 @@ class _HomePageState extends State<HomePage> {
                                 color: Colors.black,
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(30))),
+                          clipBehavior: Clip.hardEdge,
+                          child: Image.asset('assets/IT-Park_to_Nada_Sahib.jpeg',fit: BoxFit.fill,),
                           ),
                           Padding(
-                              padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                              padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
                               child: Text(
-                                'Route C',
+                                'IT-Park - Nada Sahib',
                                 style: TextStyle(
                                     fontSize: 16, fontWeight: FontWeight.w600),
                               )),
@@ -425,11 +432,13 @@ class _HomePageState extends State<HomePage> {
                                   color: Colors.black,
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(30))),
+                              clipBehavior: Clip.hardEdge,
+                              child: Image.asset('assets/Mansa_Devi_to_Ram_Darbar.avif',fit: BoxFit.fill,),
                             ),
                             Padding(
-                                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                padding: EdgeInsets.fromLTRB(6, 0, 0, 0),
                                 child: Text(
-                                  'Route D',
+                                  'Mansa Devi - Ram Darbar',
                                   style: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w600),
