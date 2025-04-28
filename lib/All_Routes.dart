@@ -15,7 +15,7 @@ class AllRoutes extends StatefulWidget {
 class _AllRoutesState extends State<AllRoutes> {
   int selected_index = 1;
 
-  List<String> avaliableRoutes = [];
+  List<Map<String, dynamic>> avaliableRoutes = [];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -31,12 +31,13 @@ class _AllRoutesState extends State<AllRoutes> {
 
   Future<void> fetchAvaliableRoutes() async {
     final response =
-        await http.get(Uri.parse('http://10.0.2.2:5000/all-available-stops'));
+        await http.get(Uri.parse('http://10.0.2.2:5000/all-available-routes'));
 
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       setState(() {
-        avaliableRoutes = List<String>.from(data['all_available_stops']);
+        avaliableRoutes =
+            List<Map<String, dynamic>>.from(data['all_available_routes']);
       });
     } else {
       throw Exception('Failed to load available stops');
@@ -48,6 +49,7 @@ class _AllRoutesState extends State<AllRoutes> {
     return Scaffold(
       appBar: AppBar(
         title: Text('All Routes'),
+        backgroundColor: Color.fromARGB(255, 2, 75, 201),
       ),
       body: avaliableRoutes.isEmpty
           ? Center(
@@ -57,7 +59,17 @@ class _AllRoutesState extends State<AllRoutes> {
               itemCount: avaliableRoutes.length,
               itemBuilder: (context, index) {
                 final route = avaliableRoutes[index];
-                return ListTile();
+                return Card(
+                  margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  elevation: 5,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                  child: ListTile(
+                    title: Text('${index + 1} From: ${route['from']}',style: TextStyle(fontWeight: FontWeight.bold),),
+                    subtitle: Text(
+                        '   To: ${route['to']} (Distance: ${route['distance_km']})'),
+                  ),
+                );
               },
             ),
       bottomNavigationBar: BottomNavigationBar(

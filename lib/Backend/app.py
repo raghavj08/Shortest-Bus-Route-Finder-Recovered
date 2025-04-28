@@ -142,7 +142,7 @@ def available_routes():
                         "distance_km": graph[i][j]
                     })
 
-    return jsonify({"available_routes": routes})
+    return jsonify({"all_available_routes": routes})
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000,debug=True)
