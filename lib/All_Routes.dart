@@ -48,7 +48,8 @@ class _AllRoutesState extends State<AllRoutes> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('All Routes'),
+        iconTheme: IconThemeData(color: Colors.white),
+        title: Text('All Routes',style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800),),
         backgroundColor: Color.fromARGB(255, 2, 75, 201),
       ),
       body: avaliableRoutes.isEmpty
@@ -65,9 +66,9 @@ class _AllRoutesState extends State<AllRoutes> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10)),
                   child: ListTile(
-                    title: Text('${index + 1} From: ${route['from']}',style: TextStyle(fontWeight: FontWeight.bold),),
+                    title: Text('${index + 1}. From: ${route['from']}',style: TextStyle(fontWeight: FontWeight.bold),),
                     subtitle: Text(
-                        '   To: ${route['to']} (Distance: ${route['distance_km']})'),
+                        '   To: ${route['to']} (Distance: ${route['distance_km']} km)'),
                   ),
                 );
               },
