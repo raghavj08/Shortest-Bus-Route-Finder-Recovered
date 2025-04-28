@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'package:daa_project/All_Recent_Search_Viewer.dart';
 import 'package:daa_project/Auth/Log_In.dart';
 import 'package:daa_project/Route__Provider.dart';
-import 'package:daa_project/Save.dart';
-import 'package:daa_project/Search.dart';
+import 'package:daa_project/Profile.dart';
+import 'package:daa_project/All_Routes.dart';
 import 'package:daa_project/Searched_Routes.dart';
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -519,7 +519,7 @@ class _HomePageState extends State<HomePage> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => Search(),
+                              builder: (context) => AllRoutes(),
                             ));
                       },
                       icon: Icon(Icons.route_outlined)),
@@ -530,7 +530,7 @@ class _HomePageState extends State<HomePage> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => Save(),
+                              builder: (context) => Profile(),
                             ));
                       },
                       icon: Icon(Icons.person)),

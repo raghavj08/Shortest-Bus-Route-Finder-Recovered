@@ -127,7 +127,22 @@ def shortest_path():
 def available_stops():
     return jsonify({"available_stops": stops})
 
+@app.route('/all-available-routes', methods=['GET'])
+def available_routes():
+    routes = []
 
+    for bus, graph in buses.items():
+        for i in range(len(stops)):
+            for j in range(len(stops)):
+                if graph[i][j] != -1 and i != j:
+                    routes.append({
+                        "bus": bus,
+                        "from": stops[i],
+                        "to": stops[j],
+                        "distance_km": graph[i][j]
+                    })
+
+    return jsonify({"available_routes": routes})
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000,debug=True)

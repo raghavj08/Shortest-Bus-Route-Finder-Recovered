@@ -1,15 +1,15 @@
 import 'package:daa_project/Home_Page.dart';
-import 'package:daa_project/Search.dart';
+import 'package:daa_project/All_Routes.dart';
 import 'package:flutter/material.dart';
 
-class Save extends StatefulWidget {
-  const Save({super.key});
+class Profile extends StatefulWidget {
+  const Profile({super.key});
 
   @override
-  State<Save> createState() => _SaveState();
+  State<Profile> createState() => _ProfileState();
 }
 
-class _SaveState extends State<Save> {
+class _ProfileState extends State<Profile> {
   int selected_index = 2;
 
   void _onItemTapped(int index) {
@@ -45,7 +45,7 @@ class _SaveState extends State<Save> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => Search(),
+                              builder: (context) => AllRoutes(),
                             ));
                       },
                       icon: Icon(Icons.route_outlined)),
@@ -56,7 +56,7 @@ class _SaveState extends State<Save> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => Save(),
+                              builder: (context) => Profile(),
                             ));
                       },
                       icon: Icon(Icons.person)),
