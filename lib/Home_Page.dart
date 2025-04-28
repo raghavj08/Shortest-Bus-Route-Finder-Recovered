@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:daa_project/All_Recent_Search_Viewer.dart';
 import 'package:daa_project/Auth/Log_In.dart';
 import 'package:daa_project/Route__Provider.dart';
@@ -363,9 +362,6 @@ class _HomePageState extends State<HomePage> {
                                 style: TextStyle(
                                     fontSize: 16, fontWeight: FontWeight.w600),
                               )),
-                          Padding(
-                              padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                              child: Text('Fastest Route')),
                         ],
                       ),
                       SizedBox(
@@ -389,9 +385,6 @@ class _HomePageState extends State<HomePage> {
                                 style: TextStyle(
                                     fontSize: 16, fontWeight: FontWeight.w600),
                               )),
-                          Padding(
-                              padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                              child: Text('Cheapest Route')),
                         ],
                       ),
                       SizedBox(
@@ -415,9 +408,6 @@ class _HomePageState extends State<HomePage> {
                                 style: TextStyle(
                                     fontSize: 16, fontWeight: FontWeight.w600),
                               )),
-                          Padding(
-                              padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                              child: Text('Fastest Route')),
                         ],
                       ),
                       SizedBox(
@@ -444,9 +434,6 @@ class _HomePageState extends State<HomePage> {
                                       fontSize: 16,
                                       fontWeight: FontWeight.w600),
                                 )),
-                            Padding(
-                                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                                child: Text('Cheapest Route')),
                           ],
                         ),
                       ),
@@ -483,9 +470,6 @@ class _HomePageState extends State<HomePage> {
                             style: TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.w600),
                           )),
-                      Padding(
-                          padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                          child: Text('Fastest Route')),
                     ],
                   ),
                 ),
@@ -538,8 +522,8 @@ class _HomePageState extends State<HomePage> {
                               builder: (context) => Search(),
                             ));
                       },
-                      icon: Icon(Icons.search)),
-                  label: "Search"),
+                      icon: Icon(Icons.route_outlined)),
+                  label: "All Routes"),
               BottomNavigationBarItem(
                   icon: IconButton(
                       onPressed: () {
@@ -549,8 +533,8 @@ class _HomePageState extends State<HomePage> {
                               builder: (context) => Save(),
                             ));
                       },
-                      icon: Icon(Icons.save_alt_rounded)),
-                  label: 'Saved')
+                      icon: Icon(Icons.person)),
+                  label: 'Profile')
             ]),
       ),
     );
