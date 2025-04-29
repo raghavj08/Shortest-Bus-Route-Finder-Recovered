@@ -27,9 +27,9 @@ class _EditProfileState extends State<EditProfile> {
     }
   }
 
-  void _saveProfile(){
-    Navigator.pop(context,{
-      'name':nameController.text,
+  void _saveProfile() {
+    Navigator.pop(context, {
+      'name': nameController.text,
       'username': usernameController.text,
       'bio': bioController.text,
       'image': _image
@@ -40,16 +40,66 @@ class _EditProfileState extends State<EditProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Profile',style: TextStyle(fontWeight: FontWeight.w700,color: Color.fromARGB(255, 2, 75, 201)),),
+        title: Text(
+          'Edit Profile',
+          style: TextStyle(
+              fontWeight: FontWeight.w700,
+              color: Color.fromARGB(255, 2, 75, 201)),
+        ),
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16),
         child: Column(
           children: [
-            
+            Stack(
+              alignment: Alignment.bottomRight,
+              children: [
+                CircleAvatar(
+                  radius: 60,
+                  backgroundImage: _image != null ? FileImage(_image!) : null,
+                  child: _image == null
+                      ? Icon(
+                          Icons.person,
+                          size: 60,
+                        )
+                      : null,
+                ),
+                FloatingActionButton(
+                    mini: true,
+                    child: Icon(Icons.edit),
+                    onPressed: () {
+                      _pickImage();
+                    })
+              ],
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            _buildTextField("Name", nameController),
+            _buildTextField("Username", usernameController),
+            _buildTextField("Bio", bioController, maxLines: 3),
+            SizedBox(
+              height: 30,
+            ),
+            ElevatedButton(onPressed: _saveProfile, child: Text('Save'))
           ],
         ),
       ),
     );
   }
+}
+
+Widget _buildTextField(String label, TextEditingController controller,
+    {int maxLines = 1}) {
+  return Padding(
+    padding: EdgeInsets.symmetric(vertical: 6),
+    child: TextField(
+      controller: controller,
+      maxLines: maxLines,
+      decoration: InputDecoration(
+        labelText: label,
+        border: OutlineInputBorder(),
+      ),
+    ),
+  );
 }
