@@ -21,7 +21,11 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Text('Hello'),
+      appBar: AppBar(
+        title: Text('My Profile', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700),),
+        backgroundColor: Color.fromARGB(255, 2, 75, 201),
+        iconTheme: IconThemeData(color: Colors.white),
+      ),
       bottomNavigationBar: BottomNavigationBar(
             currentIndex: selected_index,
             onTap: _onItemTapped,
