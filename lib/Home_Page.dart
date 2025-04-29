@@ -73,9 +73,37 @@ class _HomePageState extends State<HomePage> {
       }
     } catch (error) {
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(
-              'Failed to connect to the server: $error')));
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Failed to connect to the server: $error')));
+    }
+  }
+
+  Future<void> _searchContainerRoutes(
+      BuildContext context, String source, String destination) async {
+    final Uri uri = Uri.parse(
+        'http://10.0.2.2:5000/shortest-path?source=$source&destination=$destination');
+    try {
+      final response = await http.get(uri);
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> Container_Data = json.decode(response.body);
+        if (!mounted) return;
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => SearchedRoutes(
+                    source: source,
+                    destination: destination,
+                    searchResults: Container_Data)));
+      } else {
+        if (!mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Error ${response.reasonPhrase}')));
+      }
+    } catch (error) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Failed to connect to the server: $error')));
     }
   }
 
@@ -347,15 +375,26 @@ class _HomePageState extends State<HomePage> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Container(
-                            height: 200,
-                            width: 200,
-                            decoration: BoxDecoration(
-                                color: Colors.black,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(30))),
-                            clipBehavior: Clip.hardEdge,
-                            child: Image.asset('assets/PGI_to_Zirakpur.webp',fit: BoxFit.fill,),
+                          GestureDetector(
+                            onTap: () {
+                              String source = 'PGI';
+                              String destination = 'Zirakpur';
+                              _searchContainerRoutes(
+                                  context, source, destination);
+                            },
+                            child: Container(
+                              height: 200,
+                              width: 200,
+                              decoration: BoxDecoration(
+                                  color: Colors.black,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(30))),
+                              clipBehavior: Clip.hardEdge,
+                              child: Image.asset(
+                                'assets/PGI_to_Zirakpur.webp',
+                                fit: BoxFit.fill,
+                              ),
+                            ),
                           ),
                           Padding(
                               padding: EdgeInsets.fromLTRB(45, 0, 0, 0),
@@ -372,15 +411,26 @@ class _HomePageState extends State<HomePage> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Container(
-                            height: 200,
-                            width: 200,
-                            decoration: BoxDecoration(
-                                color: Colors.black,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(30))),
-                            clipBehavior: Clip.hardEdge,
-                            child: Image.asset('assets/ISBT-43_to_Manimajra.webp',fit: BoxFit.fill,),
+                          GestureDetector(
+                            onTap: () {
+                              String source = 'ISBT-43';
+                              String destination = 'Manimajra';
+                              _searchContainerRoutes(
+                                  context, source, destination);
+                            },
+                            child: Container(
+                              height: 200,
+                              width: 200,
+                              decoration: BoxDecoration(
+                                  color: Colors.black,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(30))),
+                              clipBehavior: Clip.hardEdge,
+                              child: Image.asset(
+                                'assets/ISBT-43_to_Manimajra.webp',
+                                fit: BoxFit.fill,
+                              ),
+                            ),
                           ),
                           Padding(
                               padding: EdgeInsets.fromLTRB(19, 0, 0, 0),
@@ -388,8 +438,7 @@ class _HomePageState extends State<HomePage> {
                                 'ISBT-43 - Manimajra',
                                 style: TextStyle(
                                     fontSize: 16, fontWeight: FontWeight.w600),
-                              )
-                            ),
+                              )),
                         ],
                       ),
                       SizedBox(
@@ -398,20 +447,34 @@ class _HomePageState extends State<HomePage> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Container(
-                            height: 200,
-                            width: 200,
-                            decoration: BoxDecoration(
-                                color: Colors.black,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(30))),
-                          clipBehavior: Clip.hardEdge,
-                          child: Image.asset('assets/IT-Park_to_Nada_Sahib.jpeg',fit: BoxFit.fill,),
+                          GestureDetector(
+                            onTap: () {
+                              String source = 'New Maloya Colony';
+                              String destination = 'Raipur Kalan';
+                              _searchContainerRoutes(
+                                  context, source, destination);
+                            },
+                            child: Padding(
+                              padding: EdgeInsets.fromLTRB(25, 0, 0, 0),
+                              child: Container(
+                                height: 200,
+                                width: 200,
+                                decoration: BoxDecoration(
+                                    color: Colors.black,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(30))),
+                                clipBehavior: Clip.hardEdge,
+                                child: Image.asset(
+                                  'assets/IT-Park_to_Nada_Sahib.jpeg',
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
+                            ),
                           ),
                           Padding(
-                              padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
+                              padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                               child: Text(
-                                'IT-Park - Nada Sahib',
+                                'New Maloya Colony - Raipur Kalan',
                                 style: TextStyle(
                                     fontSize: 16, fontWeight: FontWeight.w600),
                               )),
@@ -425,15 +488,26 @@ class _HomePageState extends State<HomePage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Container(
-                              height: 200,
-                              width: 200,
-                              decoration: BoxDecoration(
-                                  color: Colors.black,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(30))),
-                              clipBehavior: Clip.hardEdge,
-                              child: Image.asset('assets/Mansa_Devi_to_Ram_Darbar.avif',fit: BoxFit.fill,),
+                            GestureDetector(
+                              onTap: (){
+                              String source = 'Mansa Devi';
+                              String destination = 'Ram Darbar';
+                              _searchContainerRoutes(
+                                  context, source, destination);
+                              },
+                              child: Container(
+                                height: 200,
+                                width: 200,
+                                decoration: BoxDecoration(
+                                    color: Colors.black,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(30))),
+                                clipBehavior: Clip.hardEdge,
+                                child: Image.asset(
+                                  'assets/Mansa_Devi_to_Ram_Darbar.avif',
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
                             ),
                             Padding(
                                 padding: EdgeInsets.fromLTRB(6, 0, 0, 0),
@@ -452,55 +526,55 @@ class _HomePageState extends State<HomePage> {
                 SizedBox(
                   height: 20,
                 ),
-                Padding(
-                    padding: EdgeInsets.fromLTRB(27, 10, 0, 10),
-                    child: Text(
-                      'Saved Routes',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-                    )),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Container(
-                        height: 200,
-                        width: 200,
-                        decoration: BoxDecoration(
-                            color: Colors.black,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(30))),
-                      ),
-                      Padding(
-                          padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                          child: Text(
-                            'Route C',
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.w600),
-                          )),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(25, 0, 0, 0),
-                  child: Row(
-                    children: [
-                      Icon(Icons.add, size: 25),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Text(
-                        'Add a new Route',
-                        style: TextStyle(
-                            fontWeight: FontWeight.w800, fontSize: 16),
-                      ),
-                    ],
-                  ),
-                )
+                // Padding(
+                //     padding: EdgeInsets.fromLTRB(27, 10, 0, 10),
+                //     child: Text(
+                //       'Saved Routes',
+                //       style:
+                //           TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                //     )),
+                // Padding(
+                //   padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
+                //   child: Column(
+                //     crossAxisAlignment: CrossAxisAlignment.start,
+                //     children: <Widget>[
+                //       Container(
+                //         height: 200,
+                //         width: 200,
+                //         decoration: BoxDecoration(
+                //             color: Colors.black,
+                //             borderRadius:
+                //                 BorderRadius.all(Radius.circular(30))),
+                //       ),
+                //       Padding(
+                //           padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                //           child: Text(
+                //             'Route C',
+                //             style: TextStyle(
+                //                 fontSize: 16, fontWeight: FontWeight.w600),
+                //           )),
+                //     ],
+                //   ),
+                // ),
+                // SizedBox(
+                //   height: 20,
+                // ),
+                // Padding(
+                //   padding: EdgeInsets.fromLTRB(25, 0, 0, 0),
+                //   child: Row(
+                //     children: [
+                //       Icon(Icons.add, size: 25),
+                //       SizedBox(
+                //         width: 5,
+                //       ),
+                //       Text(
+                //         'Add a new Route',
+                //         style: TextStyle(
+                //             fontWeight: FontWeight.w800, fontSize: 16),
+                //       ),
+                //     ],
+                //   ),
+                // )
               ],
             ),
           ]),
