@@ -40,17 +40,20 @@ class _EditProfileState extends State<EditProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.white),
+        backgroundColor: Color.fromARGB(255, 2, 75, 201),
         title: Text(
           'Edit Profile',
           style: TextStyle(
               fontWeight: FontWeight.w700,
-              color: Color.fromARGB(255, 2, 75, 201)),
+              color: Colors.white),
         ),
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16),
         child: Column(
           children: [
+            SizedBox(height: 40,),
             Stack(
               alignment: Alignment.bottomRight,
               children: [
@@ -76,7 +79,9 @@ class _EditProfileState extends State<EditProfile> {
               height: 20,
             ),
             _buildTextField("Name", nameController),
+            SizedBox(height: 10,),
             _buildTextField("Username", usernameController),
+            SizedBox(height: 10,),
             _buildTextField("Bio", bioController, maxLines: 3),
             SizedBox(
               height: 30,
@@ -98,7 +103,7 @@ Widget _buildTextField(String label, TextEditingController controller,
       maxLines: maxLines,
       decoration: InputDecoration(
         labelText: label,
-        border: OutlineInputBorder(),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
       ),
     ),
   );
