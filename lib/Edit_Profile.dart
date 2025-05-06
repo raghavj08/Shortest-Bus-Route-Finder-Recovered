@@ -95,7 +95,7 @@ class _EditProfileState extends State<EditProfile> {
 }
 
 Widget _buildTextField(String label, TextEditingController controller,
-    {int maxLines = 1}) {
+    {int maxLines = 3}) {
   return Padding(
     padding: EdgeInsets.symmetric(vertical: 6),
     child: TextField(
