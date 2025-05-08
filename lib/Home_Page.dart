@@ -526,55 +526,6 @@ class _HomePageState extends State<HomePage> {
                 SizedBox(
                   height: 20,
                 ),
-                // Padding(
-                //     padding: EdgeInsets.fromLTRB(27, 10, 0, 10),
-                //     child: Text(
-                //       'Saved Routes',
-                //       style:
-                //           TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-                //     )),
-                // Padding(
-                //   padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
-                //   child: Column(
-                //     crossAxisAlignment: CrossAxisAlignment.start,
-                //     children: <Widget>[
-                //       Container(
-                //         height: 200,
-                //         width: 200,
-                //         decoration: BoxDecoration(
-                //             color: Colors.black,
-                //             borderRadius:
-                //                 BorderRadius.all(Radius.circular(30))),
-                //       ),
-                //       Padding(
-                //           padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                //           child: Text(
-                //             'Route C',
-                //             style: TextStyle(
-                //                 fontSize: 16, fontWeight: FontWeight.w600),
-                //           )),
-                //     ],
-                //   ),
-                // ),
-                // SizedBox(
-                //   height: 20,
-                // ),
-                // Padding(
-                //   padding: EdgeInsets.fromLTRB(25, 0, 0, 0),
-                //   child: Row(
-                //     children: [
-                //       Icon(Icons.add, size: 25),
-                //       SizedBox(
-                //         width: 5,
-                //       ),
-                //       Text(
-                //         'Add a new Route',
-                //         style: TextStyle(
-                //             fontWeight: FontWeight.w800, fontSize: 16),
-                //       ),
-                //     ],
-                //   ),
-                // )
               ],
             ),
           ]),
