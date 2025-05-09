@@ -16,6 +16,7 @@ class _AllRecentSearchViewerState extends State<AllRecentSearchViewer> {
       builder: (context, route_provider, child) => Scaffold(
         appBar: AppBar(
           title: Text('All Recent Searches'),
+          backgroundColor: Color.fromARGB(255, 2, 75, 201),
         ),
         body: Expanded(child: Builder(builder: (context) {
           if (route_provider.routes.isEmpty) {
