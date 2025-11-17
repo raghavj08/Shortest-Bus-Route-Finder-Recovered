@@ -1,0 +1,8 @@
+type BusRoute @model @auth(rules: [{ allow: public }]) {
+  id: ID!
+  from: String!
+  to: String!
+  distance: Int!
+  roadway: String!
+  stops: [String]
+}

@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-shortestbusroutefind-dev-18cd1-authRole",
+      "UnauthRoleArn": "arn:aws:iam::935967800745:role/amplify-shortestbusroutefind-dev-18cd1-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::935967800745:role/amplify-shortestbusroutefind-dev-18cd1-authRole",
+      "Region": "eu-north-1",
+      "DeploymentBucketName": "amplify-shortestbusroutefind-dev-18cd1-deployment",
+      "UnauthRoleName": "amplify-shortestbusroutefind-dev-18cd1-unauthRole",
+      "StackName": "amplify-shortestbusroutefind-dev-18cd1",
+      "StackId": "arn:aws:cloudformation:eu-north-1:935967800745:stack/amplify-shortestbusroutefind-dev-18cd1/b486abc0-c375-11f0-9275-0a0010725d91",
+      "AmplifyAppId": "d6ix0vbgtajfd"
+    },
+    "categories": {
+      "api": {
+        "shortestbusroutefind": {}
+      }
+    }
+  }
+}
