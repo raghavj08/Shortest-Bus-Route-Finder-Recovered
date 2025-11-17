@@ -1,3 +1,4 @@
+// lib/Home_Page.dart
 import 'dart:convert';
 import 'package:daa_project/All_Recent_Search_Viewer.dart';
 import 'package:daa_project/Auth/Log_In.dart';
@@ -5,12 +6,11 @@ import 'package:daa_project/Route__Provider.dart';
 import 'package:daa_project/Profile.dart';
 import 'package:daa_project/All_Routes.dart';
 import 'package:daa_project/Searched_Routes.dart';
+import 'package:daa_project/shortest_path_service.dart';
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -50,60 +50,43 @@ class _HomePageState extends State<HomePage> {
     final String source = from_Controller.text.trim();
     final String destination = to_Controller.text.trim();
 
-    final Uri uri = Uri.parse(
-        'http://10.0.2.2:5000/shortest-path?source=$source&destination=$destination');
-
     try {
-      final response = await http.get(uri);
+      final Map<String, dynamic> data =
+          await ShortestPathService.computeShortestPath(source, destination);
 
-      if (response.statusCode == 200) {
-        final Map<String, dynamic> data = json.decode(response.body);
-        if (!mounted) return;
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => SearchedRoutes(
-                    source: source,
-                    destination: destination,
-                    searchResults: data)));
-      } else {
-        if (!mounted) return;
-        ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Error: ${response.reasonPhrase}')));
-      }
+      if (!mounted) return;
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => SearchedRoutes(
+                  source: source,
+                  destination: destination,
+                  searchResults: data)));
     } catch (error) {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to connect to the server: $error')));
+          SnackBar(content: Text('Failed to get routes: $error')));
     }
   }
 
   Future<void> _searchContainerRoutes(
       BuildContext context, String source, String destination) async {
-    final Uri uri = Uri.parse(
-        'http://10.0.2.2:5000/shortest-path?source=$source&destination=$destination');
     try {
-      final response = await http.get(uri);
+      final Map<String, dynamic> data =
+          await ShortestPathService.computeShortestPath(source, destination);
 
-      if (response.statusCode == 200) {
-        final Map<String, dynamic> Container_Data = json.decode(response.body);
-        if (!mounted) return;
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => SearchedRoutes(
-                    source: source,
-                    destination: destination,
-                    searchResults: Container_Data)));
-      } else {
-        if (!mounted) return;
-        ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Error ${response.reasonPhrase}')));
-      }
+      if (!mounted) return;
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => SearchedRoutes(
+                  source: source,
+                  destination: destination,
+                  searchResults: data)));
     } catch (error) {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to connect to the server: $error')));
+          SnackBar(content: Text('Failed to get routes: $error')));
     }
   }
 

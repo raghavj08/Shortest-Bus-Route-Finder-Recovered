@@ -13,10 +13,11 @@ class SearchedRoutes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<dynamic> allRoutes = searchResults['all_available_routes'];
-    String bestBus = searchResults['best_bus'];
-    List<dynamic> bestRoute = searchResults['best_route'];
-    int totalDistance = searchResults['total_distance_km'];
+    List<dynamic> allRoutes = searchResults['all_available_routes'] ?? [];
+    String? bestBus = searchResults['best_bus'];
+    List<dynamic> bestRoute = searchResults['best_route'] ?? [];
+    dynamic totalDistance = searchResults['total_distance_km'];
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Stack(
@@ -130,6 +131,7 @@ class SearchedRoutes extends StatelessWidget {
                   else
                     ListView.builder(
                       shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
                       itemCount: allRoutes.length,
                       itemBuilder: (context, index) {
                         final routeData = allRoutes[index];
@@ -141,8 +143,8 @@ class SearchedRoutes extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text('Bus: ${routeData['bus']}',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),
-                                Text('Distance: ${routeData['distance']} km'),
-                                Text('Route: ${routeData['route'].join(' --> ')}'),
+                                Text('Distance: ${routeData['distance_km'] ?? routeData['distance'] ?? ''} km'),
+                                finalRouteText(routeData),
                               ],
                             ),
                           ),
@@ -163,7 +165,7 @@ class SearchedRoutes extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text('Bus: $bestBus',style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-                              Text('Total Distance: $totalDistance km',),
+                              Text('Total Distance: ${totalDistance ?? ''} km',),
                               Text('Route: ${bestRoute.join(' --> ')}'),
                             ],
                           ),
@@ -179,5 +181,16 @@ class SearchedRoutes extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Widget finalRouteText(Map<String, dynamic> routeData) {
+    final route = routeData['route'];
+    if (route is List) {
+      return Text('Route: ${route.join(' --> ')}');
+    } else if (routeData['from'] != null && routeData['to'] != null) {
+      return Text('Route: ${routeData['from']} --> ${routeData['to']}');
+    } else {
+      return Text('');
+    }
   }
 }

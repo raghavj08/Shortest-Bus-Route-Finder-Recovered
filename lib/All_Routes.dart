@@ -1,9 +1,8 @@
-import 'dart:convert';
-
+// lib/All_Routes.dart
 import 'package:daa_project/Home_Page.dart';
 import 'package:daa_project/Profile.dart';
+import 'package:daa_project/graphql_service.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 
 class AllRoutes extends StatefulWidget {
   const AllRoutes({super.key});
@@ -14,8 +13,8 @@ class AllRoutes extends StatefulWidget {
 
 class _AllRoutesState extends State<AllRoutes> {
   int selected_index = 1;
-
-  List<Map<String, dynamic>> avaliableRoutes = [];
+  List<Map<String, dynamic>> availableRoutes = [];
+  bool loading = true;
 
   void _onItemTapped(int index) {
     setState(() {
@@ -26,21 +25,26 @@ class _AllRoutesState extends State<AllRoutes> {
   @override
   void initState() {
     super.initState();
-    fetchAvaliableRoutes();
+    fetchAvailableRoutes();
   }
 
-  Future<void> fetchAvaliableRoutes() async {
-    final response =
-        await http.get(Uri.parse('http://10.0.2.2:5000/all-available-routes'));
-
-    if (response.statusCode == 200) {
-      final data = json.decode(response.body);
+  Future<void> fetchAvailableRoutes() async {
+    try {
+      final items = await GraphQLService.listBusRoutes(limit: 1000);
       setState(() {
-        avaliableRoutes =
-            List<Map<String, dynamic>>.from(data['all_available_routes']);
+        availableRoutes = items.map((r) {
+          return {
+            'from': r['from'],
+            'to': r['to'],
+            'distance_km': r['distance'],
+            'bus': r['roadway'],
+          };
+        }).toList();
+        loading = false;
       });
-    } else {
-      throw Exception('Failed to load available stops');
+    } catch (e) {
+      setState(() => loading = false);
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Failed: $e')));
     }
   }
 
@@ -52,14 +56,12 @@ class _AllRoutesState extends State<AllRoutes> {
         title: Text('All Routes',style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800),),
         backgroundColor: Color.fromARGB(255, 2, 75, 201),
       ),
-      body: avaliableRoutes.isEmpty
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
+      body: loading
+          ? Center(child: CircularProgressIndicator())
           : ListView.builder(
-              itemCount: avaliableRoutes.length,
+              itemCount: availableRoutes.length,
               itemBuilder: (context, index) {
-                final route = avaliableRoutes[index];
+                final route = availableRoutes[index];
                 return Card(
                   margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   elevation: 5,
