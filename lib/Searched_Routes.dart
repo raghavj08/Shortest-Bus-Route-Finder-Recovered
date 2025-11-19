@@ -122,6 +122,29 @@ class SearchedRoutes extends StatelessWidget {
                   SizedBox(
                     height: 310,
                   ),
+                  Text('Shortest Route:',style: TextStyle(fontSize: 22, fontWeight: FontWeight.w900)),
+                    SizedBox(height: 20,),
+                    if(bestBus != null)
+                    SizedBox(
+                      width: double.infinity,
+                      child: Card(
+                        margin: EdgeInsets.symmetric(vertical: 8),
+                        child: Padding(
+                          padding: EdgeInsets.all(12),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('Bus: $bestBus',style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                              Text('Total Distance: ${totalDistance ?? ''} km',),
+                              Text('Route: ${bestRoute.join(' --> ')}'),
+                            ],
+                          ),
+                        ),
+                      ),
+                    )
+                    else
+                  Text('No shortest route found'),
+                  SizedBox(height: 30),
                   Text(
                     'All Available Routes',
                     style: TextStyle(fontSize: 22, fontWeight: FontWeight.w900),
@@ -151,29 +174,7 @@ class SearchedRoutes extends StatelessWidget {
                         );
                       },
                     ),
-                    SizedBox(height: 20,),
-                    Text('Shortest Route:',style: TextStyle(fontSize: 22, fontWeight: FontWeight.w900)),
-                    SizedBox(height: 10,),
-                    if(bestBus != null)
-                    SizedBox(
-                      width: double.infinity,
-                      child: Card(
-                        margin: EdgeInsets.symmetric(vertical: 8),
-                        child: Padding(
-                          padding: EdgeInsets.all(12),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text('Bus: $bestBus',style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-                              Text('Total Distance: ${totalDistance ?? ''} km',),
-                              Text('Route: ${bestRoute.join(' --> ')}'),
-                            ],
-                          ),
-                        ),
-                      ),
-                    )
-                    else
-                    Text('No shortest route found')
+                    // SizedBox(height: 20,),
                 ],
               ),
             )
