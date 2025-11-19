@@ -1,4 +1,3 @@
-// lib/Home_Page.dart
 import 'dart:convert';
 import 'package:daa_project/All_Recent_Search_Viewer.dart';
 import 'package:daa_project/Auth/Log_In.dart';

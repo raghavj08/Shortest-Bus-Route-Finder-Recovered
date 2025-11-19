@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 import 'package:daa_project/model/aws_route.dart';
 import 'package:http/http.dart' as http;

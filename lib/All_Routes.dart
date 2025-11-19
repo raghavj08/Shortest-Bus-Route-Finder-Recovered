@@ -1,4 +1,3 @@
-// lib/All_Routes.dart
 import 'package:daa_project/Home_Page.dart';
 import 'package:daa_project/Profile.dart';
 import 'package:daa_project/graphql_service.dart';
